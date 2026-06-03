@@ -5,6 +5,7 @@ import { useHead } from '@unhead/vue'
 import type { Category, Product } from '@/types'
 import { fetchProducts } from '@/services/products'
 import { getAuthError } from '@/services/auth'
+import { getErrorMessage } from '@/services/errors'
 import { showError } from '@/services/notifications'
 import ProductCard from '@/components/ProductCard.vue'
 import CategoryNav from '@/components/CategoryNav.vue'
@@ -27,14 +28,14 @@ const activeCategory = ref<Category | undefined>(
 onMounted(async () => {
   const authErr = getAuthError()
   if (authErr) {
-    showError('Fehler: Firebase ist nicht konfiguriert (API-Key fehlt)')
+    showError('Firebase ist nicht konfiguriert (API-Key fehlt)')
     loading.value = false
     return
   }
   try {
     products.value = await fetchProducts()
   } catch (e: any) {
-    showError(e?.message || 'Fehler beim Laden der Produkte')
+    showError(getErrorMessage(e, 'Fehler beim Laden der Produkte'))
   }
   loading.value = false
 })

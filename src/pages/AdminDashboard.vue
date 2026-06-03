@@ -5,7 +5,8 @@ import { useHead } from '@unhead/vue'
 import { signOut, onAuthChange, getAuthError } from '@/services/auth'
 import { fetchProducts, updateProduct, deleteProduct } from '@/services/products'
 import { categoryImages } from '@/assets/images'
-import { showError } from '@/services/notifications'
+import { getErrorMessage } from '@/services/errors'
+import { showError, showSuccess } from '@/services/notifications'
 import type { Product } from '@/types'
 
 useHead({
@@ -23,7 +24,7 @@ let unsubscribe: (() => void) | null = null
 onMounted(async () => {
   const authErr = getAuthError()
   if (authErr) {
-    showError('Fehler: Firebase Auth ist nicht konfiguriert (API-Key fehlt)')
+    showError('Firebase Auth ist nicht konfiguriert (API-Key fehlt)')
     loading.value = false
     return
   }
@@ -34,7 +35,7 @@ onMounted(async () => {
   try {
     products.value = await fetchProducts()
   } catch (e: any) {
-    showError(e?.message || 'Fehler beim Laden der Produkte')
+    showError(getErrorMessage(e, 'Fehler beim Laden der Produkte'))
   }
   loading.value = false
 })
@@ -47,8 +48,9 @@ async function handleToggleHidden(product: Product) {
   try {
     await updateProduct(product.id, { hidden: !product.hidden })
     product.hidden = !product.hidden
+    showSuccess(product.hidden ? 'Produkt wurde ausgeblendet.' : 'Produkt wurde eingeblendet.')
   } catch (e: any) {
-    showError(e?.message || 'Fehler beim Aktualisieren')
+    showError(getErrorMessage(e, 'Fehler beim Aktualisieren'))
   }
 }
 
@@ -57,8 +59,9 @@ async function handleDelete(id: string, name: string) {
   try {
     await deleteProduct(id)
     products.value = products.value.filter((p) => p.id !== id)
+    showSuccess('Produkt wurde gelöscht.')
   } catch (e: any) {
-    showError(e?.message || 'Fehler beim Löschen')
+    showError(getErrorMessage(e, 'Fehler beim Löschen'))
   }
 }
 
@@ -67,7 +70,7 @@ async function handleLogout() {
     await signOut()
     router.push('/admin')
   } catch (e: any) {
-    showError(e?.message || 'Fehler beim Logout')
+    showError(getErrorMessage(e, 'Fehler beim Logout'))
   }
 }
 </script>

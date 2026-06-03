@@ -5,7 +5,8 @@ import { useHead } from '@unhead/vue'
 import { onAuthChange, getAuthError } from '@/services/auth'
 import { fetchProduct, addProduct, updateProduct } from '@/services/products'
 import { compressImage, ImageError } from '@/services/image'
-import { showError } from '@/services/notifications'
+import { getErrorMessage } from '@/services/errors'
+import { showError, showSuccess } from '@/services/notifications'
 import { categories } from '@/data/products'
 import type { Category } from '@/types'
 
@@ -66,7 +67,9 @@ onMounted(async () => {
         error.value = 'Produkt nicht gefunden'
       }
     } catch (e: any) {
-      error.value = e?.message || 'Fehler beim Laden des Produkts'
+      const msg = getErrorMessage(e, 'Fehler beim Laden des Produkts')
+      error.value = msg
+      showError(msg)
     }
   }
   loading.value = false
@@ -88,7 +91,7 @@ async function onFileSelect(event: Event) {
     compressedImage.value = await compressImage(file)
     imagePreview.value = compressedImage.value
   } catch (e: any) {
-    const msg = e instanceof ImageError ? e.message : 'Fehler beim Komprimieren'
+    const msg = e instanceof ImageError ? e.message : getErrorMessage(e, 'Fehler beim Komprimieren')
     error.value = msg
     showError(msg)
     input.value = ''
@@ -133,9 +136,10 @@ async function handleSubmit() {
       await addProduct(data as any)
     }
 
+    showSuccess(isEdit.value ? 'Produkt wurde gespeichert.' : 'Produkt wurde angelegt.')
     router.push('/admin/dashboard')
   } catch (e: any) {
-    const msg = e.message || 'Fehler beim Speichern'
+    const msg = getErrorMessage(e, 'Fehler beim Speichern')
     error.value = msg
     showError(msg)
   } finally {

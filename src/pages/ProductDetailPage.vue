@@ -4,6 +4,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { fetchProduct } from '@/services/products'
 import { getAuthError } from '@/services/auth'
+import { getErrorMessage } from '@/services/errors'
 import { showError } from '@/services/notifications'
 import { categoryImages } from '@/assets/images'
 import type { Product } from '@/types'
@@ -28,7 +29,7 @@ useHead({
 onMounted(async () => {
   const authErr = getAuthError()
   if (authErr) {
-    showError('Fehler: Firebase ist nicht konfiguriert (API-Key fehlt)')
+    showError('Firebase ist nicht konfiguriert (API-Key fehlt)')
     return
   }
   const id = route.params.id as string
@@ -40,7 +41,7 @@ onMounted(async () => {
       notFound.value = true
     }
   } catch (e: any) {
-    showError(e?.message || 'Fehler beim Laden des Produkts')
+    showError(getErrorMessage(e, 'Fehler beim Laden des Produkts'))
   }
 })
 </script>

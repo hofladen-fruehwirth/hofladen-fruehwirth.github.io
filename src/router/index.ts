@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { showError } from '@/services/notifications'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -83,12 +84,21 @@ function getAuthState(): Promise<boolean> {
   })
 }
 
+router.onError((err) => {
+  if (err.message?.includes('Failed to fetch dynamically imported module') || err.message?.includes('Loading chunk')) {
+    window.location.reload()
+  }
+})
+
 router.beforeEach(async (to, _from, next) => {
   const requiresAuth = to.matched.some((r) => r.meta.requiresAuth)
   if (requiresAuth) {
     try {
       const loggedIn = await getAuthState()
-      if (!loggedIn) next('/admin')
+      if (!loggedIn) {
+        showError('Bitte melde dich an, um auf diese Seite zuzugreifen.')
+        next('/admin')
+      }
       else next()
     } catch {
       next('/admin')
