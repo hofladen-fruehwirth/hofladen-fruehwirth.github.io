@@ -17,7 +17,7 @@ useHead({
     <div class="legal-hero">
       <div class="label-wrapper">
         <div class="label-line"></div>
-        <span class="top-label">B5 Hofladen</span>
+        <span class="top-label">Privatsphäre</span>
         <div class="label-line"></div>
       </div>
       <h1 class="page-title">Datenschutz</h1>
