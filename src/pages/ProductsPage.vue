@@ -110,4 +110,19 @@ function selectCategory(cat: Category | undefined) {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 0;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+}
 </style>

@@ -444,8 +444,8 @@ useHead({
 
 @media (max-width: 768px) {
   .hero {
-    min-height: auto;
-    padding: 60px 0;
+    min-height: calc(100vh - 91px);
+    padding: 40px 0;
   }
 
   .hero-title {
@@ -489,6 +489,33 @@ useHead({
 
   .hero-buttons {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 32px 0;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .banner-card {
+    padding: 24px 16px;
   }
 }
 </style>

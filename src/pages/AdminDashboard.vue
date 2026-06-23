@@ -244,8 +244,9 @@ async function handleLogout() {
 }
 
 .btn-sm {
-  padding: 6px 14px;
+  padding: 8px 14px;
   font-size: 0.85rem;
+  min-height: 36px;
 }
 
 .btn-danger {

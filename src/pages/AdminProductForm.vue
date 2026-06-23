@@ -250,7 +250,10 @@ async function handleSubmit() {
   font-size: 0.95rem;
   font-weight: 500;
   margin-bottom: 24px;
-  padding: 0;
+  padding: 8px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .back-btn:hover {

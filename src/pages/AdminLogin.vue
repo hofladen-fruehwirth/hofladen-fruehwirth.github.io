@@ -134,4 +134,16 @@ async function handleSubmit() {
   color: var(--danger);
   font-size: 0.85rem;
 }
+
+@media (max-width: 768px) {
+  .page {
+    padding: 32px 0;
+    min-height: auto;
+  }
+
+  .login-card {
+    padding: 24px;
+    margin: 0 8px;
+  }
+}
 </style>
