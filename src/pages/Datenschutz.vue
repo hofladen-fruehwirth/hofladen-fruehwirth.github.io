@@ -161,7 +161,10 @@ useHead({
   color: var(--accent-light);
   font-size: 0.95rem;
   cursor: pointer;
-  padding: 0;
+  padding: 8px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .back-link:hover {

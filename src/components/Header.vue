@@ -119,10 +119,13 @@ function toggleMenu() {
   border-radius: 6px;
   color: #dfe6e9;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
   display: flex;
   align-items: center;
   transition: border-color 0.2s, color 0.2s;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
 }
 
 .theme-toggle:hover {
@@ -147,7 +150,9 @@ function toggleMenu() {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .menu-bar {
@@ -169,10 +174,11 @@ function toggleMenu() {
   justify-content: center;
   color: #dfe6e9;
   text-decoration: none;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 6px;
   font-weight: 500;
   transition: background 0.2s, color 0.2s;
+  min-height: 44px;
 }
 
 .nav-link:hover,
@@ -182,8 +188,9 @@ function toggleMenu() {
 }
 
 .nav-link--icon {
-  padding: 8px;
+  padding: 10px;
   margin-left: 4px;
+  min-width: 44px;
 }
 
 .gear-icon {

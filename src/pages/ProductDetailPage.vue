@@ -100,7 +100,10 @@ onMounted(async () => {
   font-size: 0.95rem;
   font-weight: 500;
   margin-bottom: 24px;
-  padding: 0;
+  padding: 8px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .back-btn:hover {
@@ -189,6 +192,20 @@ onMounted(async () => {
 @media (max-width: 768px) {
   .detail {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 0;
+  }
+
+  .detail-title {
+    font-size: 1.4rem;
+  }
+
+  .detail-desc {
+    font-size: 0.95rem;
   }
 }
 </style>

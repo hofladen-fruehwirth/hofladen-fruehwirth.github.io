@@ -157,4 +157,10 @@ useHead({
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 0;
+  }
+}
 </style>

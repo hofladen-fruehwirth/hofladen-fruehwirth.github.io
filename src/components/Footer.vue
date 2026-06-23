@@ -149,7 +149,10 @@ const openingHours = [
   color: #b2bec3;
   cursor: pointer;
   font-size: 0.85rem;
-  padding: 0;
+  padding: 4px 8px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   transition: color 0.2s;
 }
 

@@ -41,4 +41,18 @@ useHead({
   color: var(--text-muted);
   margin-bottom: 32px;
 }
+
+@media (max-width: 768px) {
+  .not-found {
+    padding: 60px 0;
+  }
+
+  .not-found h1 {
+    font-size: 2.5rem;
+  }
+
+  .not-found p {
+    font-size: 1rem;
+  }
+}
 </style>
